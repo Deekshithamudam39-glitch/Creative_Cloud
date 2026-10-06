@@ -1456,7 +1456,11 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
     .vs-tool i { font-size: 1.4rem !important; }
     .vs-tool strong { font-size: 0.92rem !important; }
 
-    /* 9. Pricing — fit-to-screen horizontal scroll on mobile */
+        /* 9. Pricing — peek next card + swipe hint arrow */
+    #packages .container {
+        position: relative !important;
+    }
+
     .packages-grid {
         display: flex !important;
         flex-wrap: nowrap !important;
@@ -1469,16 +1473,22 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
         scrollbar-width: none;
         perspective: none !important;
         scroll-padding-left: 1rem !important;
+        /* Right-edge fade hint */
+        mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
     }
     .packages-grid::-webkit-scrollbar { display: none; }
+
+    /* Partial card peek — 78% width so next card shows */
     .package-card {
-        flex: 0 0 calc(100vw - 3rem) !important;
+        flex: 0 0 78% !important;
         max-width: 340px !important;
         scroll-snap-align: start !important;
         transform: none !important;
         padding: 1.75rem 1.5rem !important;
     }
     .package-card:hover { transform: none !important; }
+
     .package-name { font-size: 1.4rem !important; }
     .package-price { font-size: 2.4rem !important; margin-bottom: 1rem !important; }
     .package-desc { font-size: 0.92rem !important; }
@@ -1488,6 +1498,29 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
         right: 1rem !important;
         font-size: 0.62rem !important;
         padding: 0.3rem 0.7rem !important;
+    }
+
+    /* Animated "swipe right" arrow overlay for pricing */
+    #packages .container::after {
+        content: '\f054';
+        font-family: 'Font Awesome 6 Free' !important;
+        font-weight: 900 !important;
+        position: absolute !important;
+        right: 1rem !important;
+        top: 55% !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        background: rgba(192, 90, 50, 0.95) !important;
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1rem !important;
+        box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5) !important;
+        pointer-events: none !important;
+        z-index: 5 !important;
+        animation: swipeHintArrow 2s ease-in-out infinite !important;
     }
 
         /* 10. Process — peek next card + swipe hint arrow */
