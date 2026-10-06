@@ -1354,7 +1354,6 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
     .service-title h3 { font-size: 1.2rem; }
     .service-title p { font-size: 0.9rem; }
 
-    .process-row { grid-template-columns: 1fr; gap: 2rem; }
     .process-step h3 { font-size: 1.2rem; }
     .process-step p { font-size: 0.9rem; }
 
@@ -1373,13 +1372,11 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
     .rail-next { right: 0.5rem; }
 
     /* ============================================
-       MOBILE-ONLY — HORIZONTAL SCROLL
+       MOBILE-ONLY — FIXES
        ============================================ */
 
     /* 1. Hide the circular hero visual on mobile */
-    .hero-editorial-visual {
-        display: none !important;
-    }
+    .hero-editorial-visual { display: none !important; }
 
     /* 2. Client cards — 2-column grid */
     .clients-grid {
@@ -1404,11 +1401,8 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
     }
 
     /* 5. Card safety */
-    .package-card,
-    .client-card,
-    .testimonial-card,
-    .vs-tool,
-    .stat-block {
+    .package-card, .client-card, .testimonial-card,
+    .vs-tool, .stat-block {
         max-width: 100% !important;
         box-sizing: border-box !important;
     }
@@ -1432,44 +1426,76 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
         scroll-snap-align: start !important;
     }
 
-    /* 7. Skills + expertise — horizontal scroll on mobile */
+    /* 7. Skills + Tools — stacked vertically (skill bars, then tools below) */
     .vs-skills-layout {
         display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        gap: 1.5rem !important;
-        padding: 0.5rem 0 1.5rem !important;
-        scroll-snap-type: x mandatory !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        overflow-x: visible !important;
+        padding: 0 !important;
     }
-    .vs-skills-layout::-webkit-scrollbar { display: none; }
     .vs-skill-bars {
-        flex: 0 0 280px !important;
-        scroll-snap-align: start !important;
+        width: 100% !important;
+        flex: 0 0 auto !important;
     }
 
-    /* 8. Tools — horizontal scroll on mobile */
+    /* 8. Tools — 2-column grid below skill bars */
     .vs-tools {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.75rem !important;
+        overflow-x: visible !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+    .vs-tool {
+        flex: initial !important;
+        scroll-snap-align: auto !important;
+        padding: 1.1rem 0.75rem !important;
+    }
+    .vs-tool i { font-size: 1.4rem !important; }
+    .vs-tool strong { font-size: 0.92rem !important; }
+
+    /* 9. Pricing — fit-to-screen horizontal scroll on mobile */
+    .packages-grid {
         display: flex !important;
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
         gap: 0.75rem !important;
-        padding: 0.5rem 0 1rem !important;
+        padding: 0.5rem 1rem 1.5rem !important;
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch !important;
         scrollbar-width: none;
+        perspective: none !important;
+        scroll-padding-left: 1rem !important;
     }
-    .vs-tools::-webkit-scrollbar { display: none; }
-    .vs-tool {
-        flex: 0 0 140px !important;
+    .packages-grid::-webkit-scrollbar { display: none; }
+    .package-card {
+        flex: 0 0 calc(100vw - 3rem) !important;
+        max-width: 340px !important;
         scroll-snap-align: start !important;
+        transform: none !important;
+        padding: 1.75rem 1.5rem !important;
+    }
+    .package-card:hover { transform: none !important; }
+    .package-name { font-size: 1.4rem !important; }
+    .package-price { font-size: 2.4rem !important; margin-bottom: 1rem !important; }
+    .package-desc { font-size: 0.92rem !important; }
+    .package-features li { font-size: 0.92rem !important; padding: 0.4rem 0 !important; }
+    .package-badge {
+        top: 1rem !important;
+        right: 1rem !important;
+        font-size: 0.62rem !important;
+        padding: 0.3rem 0.7rem !important;
     }
 
-    /* 9. Pricing — horizontal scroll on mobile */
-    .packages-grid {
+        /* 10. Process — peek next card + swipe hint arrow */
+    .process-strip .container {
+        position: relative !important;
+    }
+
+    .process-row {
         display: flex !important;
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
@@ -1479,17 +1505,47 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch !important;
         scrollbar-width: none;
-        perspective: none !important;
+        /* Right-edge fade hint */
+        mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
     }
-    .packages-grid::-webkit-scrollbar { display: none; }
-    .package-card {
-        flex: 0 0 300px !important;
-        scroll-snap-align: center !important;
-        transform: none !important;
-    }
-    .package-card:hover { transform: none !important; }
+    .process-row::-webkit-scrollbar { display: none; }
 
-    /* Instagram float — circular on mobile, stacked above WhatsApp */
+    /* Partial card peek — 78% width so next card shows */
+    .process-step {
+        flex: 0 0 78% !important;
+        max-width: 280px !important;
+        scroll-snap-align: start !important;
+    }
+
+    /* Animated "swipe right" arrow overlay */
+    .process-strip .container::after {
+        content: '\f054'; /* Font Awesome chevron-right */
+        font-family: 'Font Awesome 6 Free' !important;
+        font-weight: 900 !important;
+        position: absolute !important;
+        right: 1rem !important;
+        top: 55% !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        background: rgba(192, 90, 50, 0.95) !important;
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1rem !important;
+        box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5) !important;
+        pointer-events: none !important;
+        z-index: 5 !important;
+        animation: swipeHintArrow 2s ease-in-out infinite !important;
+    }
+
+    @keyframes swipeHintArrow {
+        0%, 100% { transform: translateX(0); opacity: 0.85; }
+        50%      { transform: translateX(8px); opacity: 1; }
+    }
+    /* Instagram float — circular on mobile */
     .ig-float {
         bottom: 5rem;
         right: 1rem;
@@ -1512,11 +1568,14 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
     .pm-body { padding: 1.5rem 1.2rem; }
     .pm-actions .btn { width: 100%; justify-content: center; }
 
-    .package-card { flex: 0 0 260px !important; padding: 2rem 1.5rem; }
-    .package-price { font-size: 2rem; }
-    .package-name { font-size: 1.3rem; }
-    .package-desc { font-size: 0.9rem; }
-    .package-features li { font-size: 0.9rem; }
+    .package-card {
+        flex: 0 0 calc(100vw - 2.5rem) !important;
+        padding: 1.5rem 1.25rem !important;
+    }
+    .package-price { font-size: 2rem !important; }
+    .package-name { font-size: 1.25rem !important; }
+    .package-desc { font-size: 0.85rem !important; }
+    .package-features li { font-size: 0.85rem !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1527,7 +1586,7 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
     .hev-svg * { animation: none !important; }
     .vs-marquee-track, .vs-tl-dot-active { animation: none !important; }
     .portfolio-rail { scroll-behavior: auto; }
-    .vs-philo-grid, .vs-skills-layout, .vs-tools, .packages-grid { scroll-behavior: auto; }
+    .vs-philo-grid, .process-row, .packages-grid { scroll-behavior: auto; }
 }
 
 ::-webkit-scrollbar { width: 10px; }
