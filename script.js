@@ -484,60 +484,6 @@
     }
 
     /* ============================================
-       VAMSHI — BEFORE / AFTER SLIDER
-       ============================================ */
-    function initBeforeAfter() {
-        const slider = document.getElementById('vsBA');
-        const afterEl = document.getElementById('vsBAAfter');
-        const handle = document.getElementById('vsBAHandle');
-        if (!slider || !afterEl || !handle) return;
-
-        let isDragging = false;
-        let currentPos = 50;
-
-        function setPos(percent) {
-            currentPos = Math.max(0, Math.min(100, percent));
-            afterEl.style.clipPath = `inset(0 ${100 - currentPos}% 0 0)`;
-            handle.style.left = currentPos + '%';
-        }
-
-        function getPercent(clientX) {
-            const rect = slider.getBoundingClientRect();
-            return ((clientX - rect.left) / rect.width) * 100;
-        }
-
-        slider.addEventListener('mousedown', (e) => { isDragging = true; setPos(getPercent(e.clientX)); });
-        window.addEventListener('mousemove', (e) => { if (!isDragging) return; setPos(getPercent(e.clientX)); });
-        window.addEventListener('mouseup', () => { isDragging = false; });
-
-        slider.addEventListener('touchstart', (e) => { isDragging = true; setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
-        slider.addEventListener('touchmove', (e) => { if (!isDragging) return; setPos(getPercent(e.touches[0].clientX)); }, { passive: true });
-        window.addEventListener('touchend', () => { isDragging = false; });
-
-        setPos(50);
-
-        if ('IntersectionObserver' in window) {
-            const obs = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const start = 50, end = 72, duration = 1400;
-                        const t0 = performance.now();
-                        function frame(now) {
-                            const p = Math.min((now - t0) / duration, 1);
-                            const eased = 1 - Math.pow(1 - p, 3);
-                            setPos(start + (end - start) * eased);
-                            if (p < 1) requestAnimationFrame(frame);
-                        }
-                        requestAnimationFrame(frame);
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.4 });
-            obs.observe(slider);
-        }
-    }
-
-    /* ============================================
        VAMSHI — TIMELINE PROGRESS
        ============================================ */
     function initTimelineProgress() {
