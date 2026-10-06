@@ -143,7 +143,7 @@
     }
 
     /* ============================================
-       REVEAL ON SCROLL (SLOW + CINEMATIC)
+       REVEAL ON SCROLL
        ============================================ */
     function initReveal() {
         const revealEls = document.querySelectorAll('.reveal');
@@ -371,7 +371,7 @@
     }
 
     /* ============================================
-       VAMSHI — COUNT-UP
+       VAMSHI — COUNT-UP (supports decimals)
        ============================================ */
     function initCountUp() {
         const counters = document.querySelectorAll('[data-count]');
@@ -380,14 +380,16 @@
         function animate(el) {
             if (el.dataset.animated === 'true') return;
             el.dataset.animated = 'true';
-            const target = parseInt(el.dataset.count, 10) || 0;
+            const target = parseFloat(el.dataset.count) || 0;
             const suffix = el.dataset.suffix || '';
+            const isDecimal = !Number.isInteger(target);
             const duration = 1800;
             const start = performance.now();
             function frame(now) {
                 const p = Math.min((now - start) / duration, 1);
                 const eased = 1 - Math.pow(1 - p, 3);
-                el.textContent = Math.round(eased * target) + suffix;
+                const current = eased * target;
+                el.textContent = (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
                 if (p < 1) requestAnimationFrame(frame);
             }
             requestAnimationFrame(frame);
