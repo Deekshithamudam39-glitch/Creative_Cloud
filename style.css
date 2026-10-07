@@ -3,15 +3,22 @@
    ============================================ */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 90px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
-section[id] { scroll-margin-top: 100px; }
+section[id] {
+    scroll-margin-top: 100px;
+}
+ * { -webkit-overflow-scrolling: touch; }
+/* Do NOT apply -webkit-overflow-scrolling to every element.
+   It should only be used on actual horizontal scroll containers. */
 
-* { -webkit-overflow-scrolling: touch; }
+
+
 
 :root {
     --cream: #f3ecdf;
@@ -53,13 +60,27 @@ h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; color: var(--rust); 
 
 .container { width: 100%; max-width: 1560px; margin: 0 auto; padding: 0 var(--pad-x); }
 
-/* NAVIGATION */
+/* ============================================
+   NAVIGATION
+   ============================================ */
 nav {
-    position: fixed; top: 0; left: 0; right: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
+
     background: rgba(243, 236, 223, 0.85);
+
+    /* Safari / iPhone support */
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
+
     border-bottom: 1px solid var(--border);
+
+    /* Prevent Safari rendering glitches */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1rem 0; }
@@ -119,7 +140,9 @@ nav {
 
 .menu-toggle { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--ink); padding: 0.4rem; }
 
-/* HERO */
+/* ============================================
+   HERO
+   ============================================ */
 .hero { padding: 9rem 0 0; position: relative; overflow: hidden; background: #fcfaf6; }
 
 .hero::before {
@@ -294,7 +317,9 @@ nav {
 .hero-skills span:not(.dot-sep):hover { color: var(--rust); transform: translateY(-3px) scale(1.05); }
 .hero-skills .dot-sep { color: var(--rust); font-style: normal; font-size: 0.7rem; }
 
-/* BUTTONS */
+/* ============================================
+   BUTTONS
+   ============================================ */
 .btn {
     display: inline-flex; align-items: center; gap: 0.55rem;
     padding: 1rem 1.9rem; border-radius: 50px;
@@ -328,7 +353,9 @@ nav {
 }
 .btn-primary:hover::before { left: 100%; }
 
-/* STATS BAND */
+/* ============================================
+   STATS BAND
+   ============================================ */
 .stats-band { background: var(--rust); color: var(--cream); padding: 3rem 0; }
 .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
 .stat-block { padding: 1rem 0; transition: all 0.4s var(--ease); position: relative; }
@@ -338,7 +365,9 @@ nav {
 .stat-block strong { display: block; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1; letter-spacing: -0.04em; margin-bottom: 0.5rem; }
 .stat-block span { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
 
-/* MARQUEE */
+/* ============================================
+   MARQUEE
+   ============================================ */
 .marquee-band { background: var(--ink); color: var(--cream); padding: 1.4rem 0; overflow: hidden; }
 .marquee-track {
     display: inline-flex; align-items: center; gap: 1.8rem;
@@ -351,14 +380,18 @@ nav {
 .marquee-track .dot-sep { color: var(--rust); font-size: 0.8rem; font-style: normal; }
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* SECTIONS */
+/* ============================================
+   SECTIONS
+   ============================================ */
 .section { padding: 6rem 0; }
 .section-head { max-width: 800px; margin-bottom: 3.5rem; }
 .section-head .eyebrow { margin-bottom: 1.5rem; }
 .section-head h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.04em; }
 .section-sub { font-size: 1.15rem; color: var(--ink-soft); margin-top: 1.2rem; line-height: 1.6; max-width: 620px; }
 
-/* SERVICES */
+/* ============================================
+   SERVICES
+   ============================================ */
 .services-editorial { padding: 6rem 0; background: var(--cream); }
 .services-list { border-top: 1px solid var(--border); }
 
@@ -413,7 +446,9 @@ nav {
     box-shadow: 0 15px 30px -8px rgba(192, 90, 50, 0.6);
 }
 
-/* PORTFOLIO */
+/* ============================================
+   PORTFOLIO
+   ============================================ */
 .portfolio-magazine { padding: 6rem 0; background: var(--cream-2); position: relative; }
 
 .portfolio-filters { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2rem; }
@@ -543,7 +578,9 @@ nav {
 .rail-prev { left: 1rem; }
 .rail-next { right: 1rem; }
 
-/* PROJECT MODAL */
+/* ============================================
+   PROJECT MODAL
+   ============================================ */
 .project-modal {
     position: fixed; inset: 0; z-index: 3000;
     display: flex; align-items: center; justify-content: center;
@@ -607,7 +644,9 @@ nav {
 .pm-desc { font-size: 1rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 1rem; }
 .pm-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 0.5rem; }
 
-/* VAMSHI SECTION */
+/* ============================================
+   VAMSHI SECTION
+   ============================================ */
 .vamshi-section {
     position: relative; padding: 8rem 0;
     background: #1a1614; color: var(--cream);
@@ -880,7 +919,9 @@ nav {
     color: rgba(243, 236, 223, 0.5);
 }
 
-/* PHILOSOPHY */
+/* ============================================
+   PHILOSOPHY
+   ============================================ */
 .vs-philosophy { padding: 7rem 0; background: var(--ink); color: var(--cream); position: relative; overflow: hidden; }
 .vs-philosophy h2 { color: var(--cream); }
 .vs-philosophy h2 em { color: var(--rust-light); }
@@ -938,7 +979,9 @@ nav {
 
 .vs-philo-card:hover .vs-philo-glow { opacity: 1; }
 
-/* TIMELINE */
+/* ============================================
+   TIMELINE
+   ============================================ */
 .vs-timeline-section { padding: 7rem 0; background: var(--cream-2); position: relative; overflow: hidden; }
 .vs-timeline { position: relative; max-width: 900px; margin: 0 auto; padding-left: 3rem; }
 
@@ -1006,7 +1049,9 @@ nav {
 .vs-tl-card p { font-size: 0.96rem; color: var(--ink-soft); line-height: 1.6; }
 .vs-tl-card-active p { color: rgba(243, 236, 223, 0.75); }
 
-/* TOOLS MARQUEE */
+/* ============================================
+   TOOLS MARQUEE
+   ============================================ */
 .vs-marquee-band {
     background: var(--ink); color: var(--cream);
     padding: 1.6rem 0; overflow: hidden;
@@ -1028,7 +1073,9 @@ nav {
 
 @keyframes vsMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* PROCESS */
+/* ============================================
+   PROCESS
+   ============================================ */
 .process-strip { background: var(--ink); color: var(--cream); padding: 6rem 0; }
 .process-strip h2 { color: var(--cream); }
 .process-strip h2 em { color: var(--rust-light); }
@@ -1044,7 +1091,9 @@ nav {
 .process-step:hover h3 { transform: translateX(4px); color: var(--rust-light); }
 .process-step p { font-size: 0.98rem; color: rgba(243, 236, 223, 0.65); line-height: 1.6; }
 
-/* CLIENTS */
+/* ============================================
+   CLIENTS
+   ============================================ */
 .clients-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; perspective: 1000px; }
 
 .client-card {
@@ -1086,7 +1135,9 @@ nav {
 .c7 { background: linear-gradient(140deg, #f0dec0, #e0c79a); }
 .c8 { background: linear-gradient(140deg, #cfc8f0, #b3a8e0); }
 
-/* TESTIMONIALS */
+/* ============================================
+   TESTIMONIALS
+   ============================================ */
 .testimonials-big { background: var(--ink); color: var(--cream); padding: 6rem 0; }
 .testimonials-big h2 { color: var(--cream); }
 .testimonials-big h2 em { color: var(--rust-light); }
@@ -1114,7 +1165,9 @@ nav {
 .author strong { display: block; font-size: 0.98rem; font-weight: 600; color: var(--cream); margin-bottom: 0.1rem; }
 .author span { display: block; font-size: 0.85rem; color: rgba(243, 236, 223, 0.5); }
 
-/* PACKAGES */
+/* ============================================
+   PACKAGES
+   ============================================ */
 .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: stretch; perspective: 1200px; }
 
 .package-card {
@@ -1165,7 +1218,22 @@ nav {
 .package-card.featured .btn-outline { border-color: rgba(243, 236, 223, 0.35); color: var(--cream); }
 .package-card.featured .btn-outline:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
 
-/* CONTACT */
+.price-per {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--ink-muted);
+    margin-left: 0.15rem;
+    vertical-align: baseline;
+}
+.package-card.featured .price-per {
+    color: rgba(243, 236, 223, 0.55);
+}
+
+/* ============================================
+   CONTACT — CONVERSION LAYOUT
+   ============================================ */
 .contact-panel {
     background: var(--rust); color: var(--cream);
     border-radius: 24px; padding: 6rem 3rem;
@@ -1195,7 +1263,235 @@ nav {
 .contact-meta { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(243, 236, 223, 0.7); position: relative; z-index: 1; }
 .contact-meta span { display: inline-flex; align-items: center; gap: 0.5rem; }
 
-/* FOOTER */
+/* Bigger contact eyebrow */
+#contact .contact-panel > .eyebrow {
+    font-size: 0.85rem !important;
+    letter-spacing: 0.18em !important;
+    color: var(--cream) !important;
+    margin-bottom: 1.5rem !important;
+}
+#contact .contact-panel > .eyebrow .eyebrow-line {
+    background: var(--cream) !important;
+    width: 50px !important;
+    height: 2px !important;
+}
+
+.contact-lead {
+    font-size: 1.1rem !important;
+    max-width: 620px !important;
+    margin: 0 auto 2.5rem !important;
+    line-height: 1.65 !important;
+    color: rgba(243, 236, 223, 0.9) !important;
+}
+.contact-lead strong {
+    color: var(--cream);
+    font-weight: 600;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+}
+
+/* Why Vamshi — 4 pillars */
+.why-vamshi {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.wv-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.25rem 0.75rem;
+    background: rgba(243, 236, 223, 0.08);
+    border: 1px solid rgba(243, 236, 223, 0.15);
+    border-radius: 14px;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+}
+
+.wv-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(243, 236, 223, 0.25) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s var(--ease);
+    pointer-events: none;
+}
+
+.wv-item:hover::before { opacity: 1; }
+
+.wv-item:hover {
+    background: rgba(243, 236, 223, 0.18);
+    border-color: var(--cream);
+    transform: translateY(-8px) scale(1.04);
+    box-shadow:
+        0 20px 40px -12px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(243, 236, 223, 0.4) inset;
+}
+
+.wv-item i {
+    font-size: 1.35rem;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+    opacity: 0.9;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wv-item:hover i {
+    transform: scale(1.25) rotate(-8deg);
+    opacity: 1;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(243, 236, 223, 0.6);
+}
+
+.wv-item strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+    transition: color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.wv-item:hover strong {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.wv-item span {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: rgba(243, 236, 223, 0.7);
+    transition: color 0.4s var(--ease);
+}
+
+.wv-item:hover span {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* How it works — 3 steps */
+.contact-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto 2.25rem;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+}
+
+.cs-step {
+    padding: 1.5rem 1.25rem;
+    background: rgba(243, 236, 223, 0.1);
+    border: 1px solid rgba(243, 236, 223, 0.18);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+}
+
+.cs-step::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 3px; height: 100%;
+    background: var(--cream);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s var(--ease);
+}
+
+.cs-step:hover::after { transform: scaleY(1); }
+
+.cs-step:hover {
+    background: rgba(243, 236, 223, 0.2);
+    border-color: rgba(243, 236, 223, 0.5);
+    transform: translateY(-8px) translateX(4px);
+    box-shadow:
+        0 25px 50px -15px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(243, 236, 223, 0.3) inset;
+}
+
+.cs-num {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--cream);
+    opacity: 0.6;
+    margin-bottom: 0.6rem;
+    transition: all 0.4s var(--ease);
+}
+
+.cs-step:hover .cs-num {
+    opacity: 1;
+    transform: scale(1.15) translateX(2px);
+    color: #fff;
+}
+
+.cs-step h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    transition: color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.cs-step:hover h3 {
+    color: #fff;
+    transform: translateX(6px);
+}
+
+.cs-step p {
+    font-size: 0.92rem;
+    color: rgba(243, 236, 223, 0.78);
+    line-height: 1.55;
+    transition: color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.cs-step:hover p {
+    color: rgba(255, 255, 255, 0.95);
+    transform: translateX(6px);
+}
+
+.contact-closer {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem !important;
+    color: rgba(243, 236, 223, 0.95) !important;
+    max-width: 600px;
+    margin: 0 auto 2rem !important;
+    line-height: 1.5 !important;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.contact-closer em {
+    color: var(--cream);
+    font-style: italic;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
 footer { background: var(--cream-2); border-top: 1px solid var(--border); padding: 2rem 0; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
 .footer-brand { display: flex; align-items: center; gap: 0.6rem; }
@@ -1214,7 +1510,9 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
 
 .footer-social a:hover { background: var(--rust); color: var(--cream); border-color: var(--rust); transform: translateY(-5px) scale(1.1) rotate(-8deg); }
 
-/* WHATSAPP FLOAT */
+/* ============================================
+   FLOATING BUTTONS
+   ============================================ */
 .wa-float {
     position: fixed; bottom: 2.5rem; right: 1rem;
     display: inline-flex; align-items: center; gap: 0.6rem;
@@ -1229,7 +1527,6 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
 .wa-float:hover { background: var(--rust); transform: translateY(-5px) scale(1.06); }
 .wa-float i { font-size: 1.2rem; }
 
-/* INSTAGRAM FLOAT */
 .ig-float {
     position: fixed;
     bottom: 6.5rem;
@@ -1255,11 +1552,15 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
 
 .ig-float i { font-size: 1.2rem; }
 
-/* REVEAL */
+/* ============================================
+   REVEAL
+   ============================================ */
 .reveal { opacity: 0; transform: translateY(80px); transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* RESPONSIVE */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 @media (max-width: 1100px) {
     .logo-text { font-size: 1.9rem; }
     .logo-mark { width: 50px; height: 50px; font-size: 1.05rem; }
@@ -1294,6 +1595,10 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
     .logo-mark { width: 46px; height: 46px; font-size: 1rem; }
 
     .portfolio-card { width: 270px; }
+
+    /* Contact — stack on tablet */
+    .why-vamshi { grid-template-columns: repeat(2, 1fr); }
+    .contact-steps { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -1372,13 +1677,13 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
     .rail-next { right: 0.5rem; }
 
     /* ============================================
-       MOBILE-ONLY — FIXES
+       MOBILE-ONLY FIXES
        ============================================ */
 
-    /* 1. Hide the circular hero visual on mobile */
+    /* 1. Hide hero visual */
     .hero-editorial-visual { display: none !important; }
 
-    /* 2. Client cards — 2-column grid */
+    /* 2. Client cards — 2-column */
     .clients-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 0.75rem !important;
@@ -1388,26 +1693,22 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
         padding: 1.25rem 0.75rem !important;
     }
 
-    /* 3. Testimonials — single column */
-    .testimonials-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
-    }
-
-    /* 4. Prevent any horizontal overflow */
+    /* 3. Prevent horizontal overflow */
     body, html {
         overflow-x: hidden !important;
         max-width: 100vw !important;
     }
 
-    /* 5. Card safety */
+    /* 4. Card safety */
     .package-card, .client-card, .testimonial-card,
     .vs-tool, .stat-block {
         max-width: 100% !important;
         box-sizing: border-box !important;
     }
 
-    /* 6. Philosophy — horizontal scroll on mobile */
+    /* 5. Philosophy — horizontal scroll with peek + arrow */
+    .vs-philosophy .container { position: relative !important; }
+
     .vs-philo-grid {
         display: flex !important;
         flex-wrap: nowrap !important;
@@ -1419,141 +1720,18 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
         -webkit-overflow-scrolling: touch !important;
         scrollbar-width: none;
         perspective: none !important;
+        mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
     }
     .vs-philo-grid::-webkit-scrollbar { display: none; }
     .vs-philo-card {
-        flex: 0 0 280px !important;
-        scroll-snap-align: start !important;
-    }
-
-    /* 7. Skills + Tools — stacked vertically (skill bars, then tools below) */
-    .vs-skills-layout {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 2rem !important;
-        overflow-x: visible !important;
-        padding: 0 !important;
-    }
-    .vs-skill-bars {
-        width: 100% !important;
-        flex: 0 0 auto !important;
-    }
-
-    /* 8. Tools — 2-column grid below skill bars */
-    .vs-tools {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.75rem !important;
-        overflow-x: visible !important;
-        padding: 0 !important;
-        width: 100% !important;
-    }
-    .vs-tool {
-        flex: initial !important;
-        scroll-snap-align: auto !important;
-        padding: 1.1rem 0.75rem !important;
-    }
-    .vs-tool i { font-size: 1.4rem !important; }
-    .vs-tool strong { font-size: 0.92rem !important; }
-
-        /* 9. Pricing — peek next card + swipe hint arrow */
-    #packages .container {
-        position: relative !important;
-    }
-
-    .packages-grid {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        gap: 0.75rem !important;
-        padding: 0.5rem 1rem 1.5rem !important;
-        scroll-snap-type: x mandatory !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none;
-        perspective: none !important;
-        scroll-padding-left: 1rem !important;
-        /* Right-edge fade hint */
-        mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-    }
-    .packages-grid::-webkit-scrollbar { display: none; }
-
-    /* Partial card peek — 78% width so next card shows */
-    .package-card {
         flex: 0 0 78% !important;
-        max-width: 340px !important;
+        max-width: 300px !important;
         scroll-snap-align: start !important;
-        transform: none !important;
-        padding: 1.75rem 1.5rem !important;
-    }
-    .package-card:hover { transform: none !important; }
-
-    .package-name { font-size: 1.4rem !important; }
-    .package-price { font-size: 2.4rem !important; margin-bottom: 1rem !important; }
-    .package-desc { font-size: 0.92rem !important; }
-    .package-features li { font-size: 0.92rem !important; padding: 0.4rem 0 !important; }
-    .package-badge {
-        top: 1rem !important;
-        right: 1rem !important;
-        font-size: 0.62rem !important;
-        padding: 0.3rem 0.7rem !important;
     }
 
-    /* Animated "swipe right" arrow overlay for pricing */
-    #packages .container::after {
+    .vs-philosophy .container::after {
         content: '\f054';
-        font-family: 'Font Awesome 6 Free' !important;
-        font-weight: 900 !important;
-        position: absolute !important;
-        right: 1rem !important;
-        top: 55% !important;
-        width: 44px !important;
-        height: 44px !important;
-        border-radius: 50% !important;
-        background: rgba(192, 90, 50, 0.95) !important;
-        color: #fff !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-size: 1rem !important;
-        box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5) !important;
-        pointer-events: none !important;
-        z-index: 5 !important;
-        animation: swipeHintArrow 2s ease-in-out infinite !important;
-    }
-
-        /* 10. Process — peek next card + swipe hint arrow */
-    .process-strip .container {
-        position: relative !important;
-    }
-
-    .process-row {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        gap: 1rem !important;
-        padding: 0.5rem 0 1.5rem !important;
-        scroll-snap-type: x mandatory !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none;
-        /* Right-edge fade hint */
-        mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-    }
-    .process-row::-webkit-scrollbar { display: none; }
-
-    /* Partial card peek — 78% width so next card shows */
-    .process-step {
-        flex: 0 0 78% !important;
-        max-width: 280px !important;
-        scroll-snap-align: start !important;
-    }
-
-    /* Animated "swipe right" arrow overlay */
-    .process-strip .container::after {
-        content: '\f054'; /* Font Awesome chevron-right */
         font-family: 'Font Awesome 6 Free' !important;
         font-weight: 900 !important;
         position: absolute !important;
@@ -1578,51 +1756,355 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
         0%, 100% { transform: translateX(0); opacity: 0.85; }
         50%      { transform: translateX(8px); opacity: 1; }
     }
-    /* Instagram float — circular on mobile */
-    .ig-float {
-        bottom: 5rem;
-        right: 1rem;
-        padding: 1rem;
-        border-radius: 50%;
+
+    /* 6. Skills + Tools — stack vertically */
+    .vs-skills-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        overflow-x: visible !important;
+        padding: 0 !important;
     }
-    .ig-float span { display: none; }
-}
+    .vs-skill-bars {
+        width: 100% !important;
+        flex: 0 0 auto !important;
+    }
 
-@media (max-width: 480px) {
-    .contact-actions .btn { width: 100%; justify-content: center; font-size: 0.9rem; }
-    .hero-skills { font-size: 0.9rem; gap: 0.6rem; }
-    .hero-editorial-stats { gap: 1rem; }
-    .he-stat strong { font-size: 1.4rem; }
+    /* Tools — 2-column grid below skill bars */
+    .vs-tools {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.75rem !important;
+        overflow-x: visible !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+    .vs-tool {
+        flex: initial !important;
+        scroll-snap-align: auto !important;
+        padding: 1.1rem 0.75rem !important;
+    }
+    .vs-tool i { font-size: 1.4rem !important; }
+    .vs-tool strong { font-size: 0.92rem !important; }
 
-    .logo-text { font-size: 1.4rem; }
-    .logo-mark { width: 38px; height: 38px; font-size: 0.85rem; }
+    /* 7. Pricing — peek next card + arrow */
+    #packages .container { position: relative !important; }
 
-    .portfolio-card { width: 220px; }
-    .pm-body { padding: 1.5rem 1.2rem; }
-    .pm-actions .btn { width: 100%; justify-content: center; }
+    .packages-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        gap: 0.75rem !important;
+        padding: 0.5rem 1rem 1.5rem !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none;
+        perspective: none !important;
+        scroll-padding-left: 1rem !important;
+        mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    }
+    .packages-grid::-webkit-scrollbar { display: none; }
 
     .package-card {
-        flex: 0 0 calc(100vw - 2.5rem) !important;
-        padding: 1.5rem 1.25rem !important;
+        flex: 0 0 78% !important;
+        max-width: 340px !important;
+        scroll-snap-align: start !important;
+        transform: none !important;
+        padding: 1.75rem 1.5rem !important;
     }
-    .package-price { font-size: 2rem !important; }
-    .package-name { font-size: 1.25rem !important; }
-    .package-desc { font-size: 0.85rem !important; }
-    .package-features li { font-size: 0.85rem !important; }
+    .package-card:hover { transform: none !important; }
+    .package-name { font-size: 1.4rem !important; }
+    .package-price { font-size: 2.4rem !important; margin-bottom: 1rem !important; }
+    .package-desc { font-size: 0.92rem !important; }
+    .package-features li { font-size: 0.92rem !important; padding: 0.4rem 0 !important; }
+    .package-badge {
+        top: 1rem !important;
+        right: 1rem !important;
+        font-size: 0.62rem !important;
+        padding: 0.3rem 0.7rem !important;
+    }
+
+    #packages .container::after {
+        content: '\f054';
+        font-family: 'Font Awesome 6 Free' !important;
+        font-weight: 900 !important;
+        position: absolute !important;
+        right: 1rem !important;
+        top: 55% !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        background: rgba(192, 90, 50, 0.95) !important;
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1rem !important;
+        box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5) !important;
+        pointer-events: none !important;
+        z-index: 5 !important;
+        animation: swipeHintArrow 2s ease-in-out infinite !important;
+    }
+
+    /* 8. Testimonials — peek next card + arrow */
+    .testimonials-big .container { position: relative !important; }
+
+    .testimonials-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        gap: 1rem !important;
+        padding: 0.5rem 0 1.5rem !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none;
+        mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    }
+    .testimonials-grid::-webkit-scrollbar { display: none; }
+    .testimonial-card {
+        flex: 0 0 78% !important;
+        max-width: 340px !important;
+        scroll-snap-align: start !important;
+        padding: 1.75rem 1.5rem !important;
+    }
+    .testimonial-card > p { font-size: 1rem !important; }
+
+    .testimonials-big .container::after {
+        content: '\f054';
+        font-family: 'Font Awesome 6 Free' !important;
+        font-weight: 900 !important;
+        position: absolute !important;
+        right: 1rem !important;
+        top: 55% !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        background: rgba(192, 90, 50, 0.95) !important;
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1rem !important;
+        box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5) !important;
+        pointer-events: none !important;
+        z-index: 5 !important;
+        animation: swipeHintArrow 2s ease-in-out infinite !important;
+    }
+
+    /* 9. Process — peek next card + arrow */
+    .process-strip .container { position: relative !important; }
+
+    .process-row {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        gap: 1rem !important;
+        padding: 0.5rem 0 1.5rem !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none;
+        mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    }
+    .process-row::-webkit-scrollbar { display: none; }
+    .process-step {
+        flex: 0 0 78% !important;
+        max-width: 280px !important;
+        scroll-snap-align: start !important;
+    }
+
+    .process-strip .container::after {
+        content: '\f054';
+        font-family: 'Font Awesome 6 Free' !important;
+        font-weight: 900 !important;
+        position: absolute !important;
+        right: 1rem !important;
+        top: 55% !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        background: rgba(192, 90, 50, 0.95) !important;
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1rem !important;
+        box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5) !important;
+        pointer-events: none !important;
+        z-index: 5 !important;
+        animation: swipeHintArrow 2s ease-in-out infinite !important;
+    }
+
+    /* 10. Contact — mobile stacking */
+    .why-vamshi {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.65rem !important;
+        margin-bottom: 2rem !important;
+    }
+    .wv-item {
+        padding: 1rem 0.6rem !important;
+    }
+    .wv-item i { font-size: 1.2rem !important; margin-bottom: 0.4rem !important; }
+    .wv-item strong { font-size: 0.9rem !important; }
+    .wv-item span { font-size: 0.72rem !important; }
+
+    .contact-steps {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+        margin-bottom: 1.75rem !important;
+    }
+    .cs-step {
+        padding: 1.15rem 1rem !important;
+    }
+    .cs-step h3 {
+        font-size: 1.05rem !important;
+    }
+
+    .contact-lead { font-size: 1rem !important; }
+    .contact-closer { font-size: 1.05rem !important; }
+
+    /* ============================================
+   INSTAGRAM FLOATING BUTTON
+   ============================================ */
+
+ 
+
+    /* Safari */
+    -webkit-tap-highlight-color: transparent;
 }
+
+.instagram-float i {
+    font-size: 18px;
+}
+
+.instagram-float:hover {
+    transform: translateY(-3px) scale(1.03);
+
+    box-shadow:
+        0 12px 30px rgba(214, 36, 159, 0.4);
+}
+
+
+/* ============================================
+   MOBILE INSTAGRAM BUTTON
+   ============================================ */
+
+    /* Instagram floating button */
+.instagram-float {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 14px 20px;
+    border-radius: 50px;
+
+    background: linear-gradient(
+        45deg,
+        #fdf497,
+        #fd5949 45%,
+        #d6249f 70%,
+        #285AEB 100%
+    );
+
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+
+    box-shadow: 0 8px 25px rgba(214, 36, 159, 0.3);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.instagram-float i {
+    font-size: 18px;
+}
+
+.instagram-float:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(214, 36, 159, 0.4);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .instagram-float {
+        right: 12px;
+        bottom: 12px;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border-radius: 50%;
+    }
+
+    .instagram-float i {
+        font-size: 19px;
+    }
+
+    .instagram-float span {
+        display: none;
+    }
+
+    .instagram-float:hover {
+        transform: none;
+    }
+}    
+
+    
+
+
+/* ============================================
+   SAFER TOUCH INTERACTION
+   ============================================ */
+
+button,
+a,
+input,
+textarea,
+select {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
+
+    html {
+        scroll-behavior: auto;
     }
-    .hev-svg * { animation: none !important; }
-    .vs-marquee-track, .vs-tl-dot-active { animation: none !important; }
-    .portfolio-rail { scroll-behavior: auto; }
-    .vs-philo-grid, .process-row, .packages-grid { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hev-svg * {
+        animation: none !important;
+    }
+
+    .vs-marquee-track,
+    .vs-tl-dot-active {
+        animation: none !important;
+    }
 }
 
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--cream-2); }
-::-webkit-scrollbar-thumb { background: #c9bfae; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--rust); }
+  
+}
