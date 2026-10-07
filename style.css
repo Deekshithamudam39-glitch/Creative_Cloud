@@ -1989,7 +1989,9 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
 
  
 
-    /* Safari */
+   /* Safari */
+a,
+button {
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -2122,3 +2124,4 @@ select {
 }
 
   
+}
