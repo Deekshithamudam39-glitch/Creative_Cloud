@@ -13,7 +13,6 @@ html {
 section[id] {
     scroll-margin-top: 100px;
 }
- * { -webkit-overflow-scrolling: touch; }
 /* Do NOT apply -webkit-overflow-scrolling to every element.
    It should only be used on actual horizontal scroll containers. */
 
@@ -1097,6 +1096,10 @@ nav {
 .clients-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; perspective: 1000px; }
 
 .client-card {
+        min-height: 140px !important;
+        padding: 1.25rem 0.75rem !important;
+    }
+.client-card {
     padding: 2rem 1.2rem; border-radius: var(--radius);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
@@ -1685,9 +1688,21 @@ footer { background: var(--cream-2); border-top: 1px solid var(--border); paddin
 
     /* 2. Client cards — 2-column */
     .clients-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.75rem !important;
-    }
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.75rem !important;
+}
+.client-card i {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.4rem !important;
+}
+
+.client-card strong {
+    font-size: 0.72rem !important;
+}
+
+.client-card span {
+    font-size: 0.6rem !important;
+}
     .client-card {
         min-height: 140px !important;
         padding: 1.25rem 0.75rem !important;
@@ -2107,4 +2122,3 @@ select {
 }
 
   
-}
